@@ -1,17 +1,16 @@
 import cv2
 import pytesseract
 import numpy as np 
-
-font_scale = 1
+font_scale = 1.5
 font = cv2.FONT_HERSHEY_PLAIN
 
 cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FPS, 50)
+cap.set(cv2.CAP_PROP_FPS, 170)
 
 if not cap.isOpened():
     cap = cv2.VideoCapture(0)
 if not cap.isOpened():
-    raise IOError("CAN'T OPEN")
+    raise IOError("CANNOT OPEN")
 
 cntr = 0
 while True:
@@ -24,7 +23,7 @@ while True:
         imgboxes = pytesseract.image_to_boxes(frame)
         for boxes in imgboxes.splitlines():
             boxes=boxes.split(' ')
-            x,y,w,h = int(boxes[1]), int(boxes[2]), int(boxes[3]), int(boxes[4])
+                x,y,w,h = int(boxes[1]), int(boxes[2]), int(boxes[3]), int(boxes[4])
             cv2.rectangle(frame, (x, imgH-y),(w,imgH-h),(0,0,255),3)
 
         #cv2.rectangle(frame, (x1, x1),(x1+w1,y1+h1),(0,0,), -1)
@@ -36,10 +35,3 @@ while True:
             break
 print(imgchar)
 cap.release()
-
-
-
-
-
-
-
